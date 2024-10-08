@@ -1,31 +1,16 @@
 import "./App.scss";
+import Home from "./Home";
+import AddCat from "./AddCat";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
     <>
       <div className="App">
-        <div className="Home">
-          <header className="Home__header">
-            <img
-              className="Home__image"
-              src="/images/cat-count-header.jpg"
-              alt="cat-count-header"
-            />
-          </header>
-          <section className="Home__section">
-            <h1 className="Home__h1">
-              Hello and welcome to the Cat Count Game App
-            </h1>
-            <p>Your cat-count counter is : 0 cat</p>
-            <h2>Your last cat-counted cats are :</h2>
-            <ul className="Home__list">
-              <li className="Home__item">Cat-count the</li>
-            </ul>
-            <button className="confirm">
-              <a href="./addCat.html">Add a cat</a>
-            </button>
-          </section>
-        </div>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/addCat" element={<AddCat />} />
+        </Routes>
       </div>
     </>
   );
