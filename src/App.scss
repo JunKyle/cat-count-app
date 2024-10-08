@@ -1,5 +1,48 @@
-.App {
+a {
+  text-decoration: none;
+}
+
+.Home {
   text-align: center;
+  background-color: #79f3cd;
+  padding: 20px;
+  height: 100vh;
+
+  border: solid 2px #fffb89;
+  position: relative;
+  border-radius: 12px;
+
+  &__header {
+    height: 50vh;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  &__image {
+    display: block;
+    height: 100%;
+    margin: 0 auto;
+    max-width: 100%;
+  }
+
+  &__section {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  &__h1 {
+    text-align: center;
+  }
+
+  &__list {
+    margin: 0 0 20px;
+    padding: 0;
+  }
+
+  &__item {
+    list-style-type: none;
+  }
 }
 
 .App-logo {
