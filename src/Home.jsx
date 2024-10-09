@@ -1,15 +1,10 @@
 import { Link } from "react-router-dom";
+import Header from "./Header";
 function Home() {
   return (
     <>
       <div className="Home">
-        <header className="Home__header">
-          <img
-            className="Home__image"
-            src="/images/cat-count-header.jpg"
-            alt="cat-count-header"
-          />
-        </header>
+        <Header />
         <section className="Home__section">
           <h1 className="Home__h1">
             Hello and welcome to the Cat Count Game App
@@ -20,7 +15,9 @@ function Home() {
             <li className="Home__item">Cat-count the</li>
           </ul>
           <button>
-            <Link to="addCat">Valider</Link>
+            <Link data-testid="home-validate-link" to="/addCat">
+              Valider
+            </Link>
           </button>
         </section>
       </div>

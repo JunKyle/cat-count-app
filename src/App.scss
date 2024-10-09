@@ -2,7 +2,21 @@ a {
   text-decoration: none;
 }
 
-.Home {
+.Header {
+  height: 50vh;
+  margin: 0 auto;
+  width: 100%;
+
+  &__image {
+    display: block;
+
+    height: 100%;
+    margin: 0 auto;
+    max-width: 100%;
+  }
+}
+
+.App {
   text-align: center;
   background-color: #79f3cd;
   padding: 20px;
@@ -11,20 +25,9 @@ a {
   border: solid 2px #fffb89;
   position: relative;
   border-radius: 12px;
+}
 
-  &__header {
-    height: 50vh;
-    margin: 0 auto;
-    width: 100%;
-  }
-
-  &__image {
-    display: block;
-    height: 100%;
-    margin: 0 auto;
-    max-width: 100%;
-  }
-
+.Home {
   &__section {
     width: 80%;
     margin: 0 auto;
