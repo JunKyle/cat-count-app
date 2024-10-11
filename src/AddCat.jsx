@@ -4,13 +4,13 @@ function AddCat() {
     <>
       <div className="AddCat">
         <section class="Home__section">
-          <h1 class="Home__h1">Votre chat a bien été ajouté !</h1>
+          <h1 className="Home__h1">Votre chat a bien été ajouté !</h1>
           <p>Vous avez cat-count : 0 chat</p>
           <p>
             Vous pouvez ajouter des détails en plus à votre cat-count
             (description, ...)
           </p>
-          <form class="AddCat__form">
+          <form className="AddCat__form">
             <label>Description</label>
             <input type="text" name="description" />
             <button>
