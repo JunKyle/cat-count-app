@@ -8,9 +8,9 @@ function Home() {
 
   useEffect(() => {
     axios
-      .get("/api")
+      .get("/comments")
       .then((response) => {
-        setBackEndData(response.data);
+        setBackEndData(response);
       })
       .catch((error) => {
         console.error(error);
@@ -32,8 +32,6 @@ function Home() {
     setTotalCatCount(totalCatCount + 1);
   }
 
-  console.log(backEndData);
-
   return (
     <>
       <div className="Home">
@@ -42,11 +40,6 @@ function Home() {
           <h1 className="Home__h1">
             Hello and welcome to the Cat Count Game App
           </h1>
-          {typeof backEndData.users === "undefined" ? (
-            <p>Loading</p>
-          ) : (
-            backEndData.users.map((user, i) => <p id={i}>{user}</p>)
-          )}
           <p>Your cat-count counter is : {totalCatCount} cat</p>
           <h2>Your last cat-counted cats are :</h2>
           <ul className="Home__list">
