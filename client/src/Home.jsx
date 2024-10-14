@@ -2,34 +2,27 @@ import { Link } from "react-router-dom";
 import Header from "./Header";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { updateCatCountByUserId } from "./catCountByUserId";
 function Home() {
-  const [totalCatCount, setTotalCatCount] = useState(0);
-  const [backEndData, setBackEndData] = useState([{}]);
+  const [catCountByUserId, setCatCountByUserId] = useState(0);
 
   useEffect(() => {
     axios
-      .get("/comments")
+      .get("/api/getCatCountByUserId")
       .then((response) => {
-        setBackEndData(response);
+        setCatCountByUserId(0);
       })
       .catch((error) => {
         console.error(error);
       });
   }, []);
 
-  /*useEffect(() => {
-    axios
-      .get("/api/getTotalCatCount")
-      .then((response) => {
-        setTotalCatCount(0);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);*/
-
   function handleClick() {
-    setTotalCatCount(totalCatCount + 1);
+    updateCatCountByUserId({
+      catCount: catCountByUserId + 1,
+      date: new Date(),
+      userId: "0",
+    });
   }
 
   return (
@@ -40,13 +33,17 @@ function Home() {
           <h1 className="Home__h1">
             Hello and welcome to the Cat Count Game App
           </h1>
-          <p>Your cat-count counter is : {totalCatCount} cat</p>
+          <p>Your cat-count counter is : {catCountByUserId} cat</p>
           <h2>Your last cat-counted cats are :</h2>
           <ul className="Home__list">
             <li className="Home__item">Cat-count the</li>
           </ul>
-          <button onClick={handleClick}>
-            <Link data-testid="home-validate-link" to="/addCat">
+          <button>
+            <Link
+              data-testid="home-validate-link"
+              to="/addCat"
+              onClick={handleClick}
+            >
               Valider
             </Link>
           </button>
