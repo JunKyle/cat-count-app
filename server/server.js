@@ -1,31 +1,72 @@
 const express = require ("express");
 const mongoose = require ("mongoose");
+const bodyParser = require("body-parser");
 
 const app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true}));
 
-const uri = "mongodb+srv://claudinemanrique:claudinemanriquecatcount@catcountcluster.34hiw.mongodb.net/?retryWrites=true&w=majority&appName=CatCountCluster";
+const uri = "mongodb+srv://claudinemanrique:claudinemanriquecatcount@catcountcluster.34hiw.mongodb.net/cat_count_database?retryWrites=true&w=majority&appName=CatCountCluster";
 
+const userSchema = new mongoose.Schema({
+  	pseudo: String,
+  	name: String,
+  	firstName: String,
+  	email: String,
+  	createdAt: Date,
+	password: String 
+});
+
+const User = mongoose.model('User', userSchema);
 
 async function connect () {
 	try {
 		await mongoose.connect(uri);
 		console.log("Connected to MongoDb mongoose");
 
-    	
+		app.post('/users', (req, res) => {
+			  const newUser = new User(req.body);
+			  console.log(req.body);
+
+			  newUser.save().then(() => {
+			    res.status(201).json({ message: 'User created successfully' });
+			  }).catch((error) => {
+			    res.status(400).json({ error: 'Error creating user' });
+			  });
+		});
+
+		app.get('/users', (req, res) => {
+		  User.find().then((users) => {
+		    res.json(users);
+		  }).catch((error) => {
+		    res.status(500).json({ error: 'Error retrieving users' });
+		  });
+		});
+
+    	// post user
+		app.post("/users1", async (req, res) => {
+  			const { pseudo, name, firstName, email, createdAt, password } = req.query;
+			console.log(req.query);
+			const database = await mongoose.connection.useDb("cat_count_database",
+				{
+				 	useCache: true
+				});
+			
+			await database.model('users',userSchema).insertOne({ pseudo, name, firstName, email, createdAt, password }).
+			    then(users => res.json({ users })).
+			    catch(err => res.status(500).json({ message: err.message }));
+		})
+
     	// Get all users
-		app.get("/users", async (req, res) => {
-			const database = await mongoose.connection.useDb("sample_mflix",
+		app.get("/users2", async (req, res) => {
+			const database = await mongoose.connection.useDb("cat_count_database",
 				{
 				 	useCache: true
 				});
 			if (!database.models['users']) {
-			    database.model('users', mongoose.Schema({ 
-			    	_id: Object, 
-			    	name: String,
-			    	email: String,
-			    	password: String }));
+			    database.model('users', userSchema);
 			}
-			database.model('users').find().
+			await database.model('users').find().
 			    then(users => res.json({ users })).
 			    catch(err => res.status(500).json({ message: err.message }));
 		})
