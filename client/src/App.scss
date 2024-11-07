@@ -1,5 +1,12 @@
+@font-face {
+  font-family: "LT_Comical";
+  src:
+    url("fonts/LT_Comical.ttf") format("truetype");
+}
+
 a {
-  text-decoration: none;
+  text-decoration: none;  
+  color: #000000;
 }
 
 .Header {
@@ -9,7 +16,6 @@ a {
 
   &__image {
     display: block;
-
     height: 100%;
     margin: 0 auto;
     max-width: 100%;
@@ -17,25 +23,64 @@ a {
 }
 
 .App {
-  text-align: center;
-  background-color: #79f3cd;
-  padding: 20px;
-  height: 100vh;
-
+  text-align: center; //#79f3cd;
+  background: repeating-linear-gradient(
+    45deg,
+    #87dce3,
+    #87dce3 2px,
+    #95f7ff 2px,
+    #95f7ff 10px
+  );
+  padding: 40px;
+  min-height: 100vh;
   border: solid 2px #fffb89;
   position: relative;
   border-radius: 12px;
 }
 
+.button {
+  font-family: "LT_Comical";
+  border-radius: 50px;
+  padding: 10px 20px;
+  background-color: #97ffbf;
+  color: black;
+  border-color: #00e82f;
+  cursor: pointer;
+
+  &--red {
+    background-color: #ff97ad;
+    border-color: #ff0000;
+  }
+
+  a {
+    font-size: 1.5rem;
+
+  }
+
+  &:hover {
+    background-color: #00e82f;
+  }
+
+  &.button--red:hover  {
+    background-color: #ff0000;
+  }
+}
+
 .Home {
   &__section {
-    width: 80%;
     margin: 0 auto;
     text-align: center;
   }
 
   &__h1 {
     text-align: center;
+    font-family: "LT_Comical";
+    font-size: 30px;
+  }
+
+  &__h2 {
+    text-align: center;
+    font-family: "LT_Comical";
   }
 
   &__list {
@@ -48,37 +93,23 @@ a {
   }
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.AddCat {
+  &__section {
+    margin: 0 auto;
+    text-align: center;
   }
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  &__h1 {
+    text-align: center;
+    font-family: "LT_Comical";
+    font-size: 30px;
   }
-  to {
-    transform: rotate(360deg);
+
+  &__button {
+    display: block;
+    margin: 20px auto 0;
+
   }
+
+  
 }

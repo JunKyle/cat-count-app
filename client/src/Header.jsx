@@ -4,7 +4,7 @@ function Header() {
       <header className="Header">
         <img
           className="Header__image"
-          src="/images/cat-count-header.jpg"
+          src="/images/CatcountLogo_v0.png"
           alt="cat-count-header"
         />
       </header>

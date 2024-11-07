@@ -43,26 +43,25 @@ function AddCat() {
   return (
     <>
       <div className="AddCat">
-        <section className="Home__section">
-          <h1 className="Home__h1">Votre chat a bien été ajouté !</h1>
-          <p>Vous avez cat-count : {catCountByUserId} chat</p>
+        <section className="AddCat__section">
+          <h1 className="AddCat__h1">Your cat has been succesfully added !</h1>
+          <p>Your cat-count total is: {catCountByUserId}</p>
           <p>
-            Vous pouvez ajouter des détails en plus à votre cat-count
-            (description, ...)
+            You can add details with your cat-count
           </p>
           <form className="AddCat__form">
-            <label>Description</label>
+            <label>Description : </label>
             <input
               type="text"
               name="description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
-            <button onClick={submitCatCountDescription}>
-              <Link to="/">Valider</Link>
+            <button className="button AddCat__button" onClick={submitCatCountDescription}>
+              <Link to="/">Confirm</Link>
             </button>
-            <button onClick={cancelCatCount}>
-              <Link to="/">Annuler mon cat-count</Link>
+            <button className="button button--red AddCat__button" onClick={cancelCatCount}>
+              <Link to="/">Cancel my cat-count</Link>
             </button>
           </form>
         </section>

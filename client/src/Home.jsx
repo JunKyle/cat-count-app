@@ -31,22 +31,22 @@ function Home() {
         <Header />
         <section className="Home__section">
           <h1 className="Home__h1">
-            Hello and welcome to the Cat Count Game App
+            Welcome to the Cat Count App
           </h1>
-          <p>Your cat-count counter is : {catCountByUserId} cat</p>
-          <h2>Your last cat-counted cats are :</h2>
-          <ul className="Home__list">
-            <li className="Home__item">Cat-count the</li>
-          </ul>
-          <button>
+          <p>Your cat-count counter is : {catCountByUserId}</p>
+          <button className="button Home__add">
             <Link
               data-testid="home-validate-link"
               to="/addCat"
               onClick={handleClick}
             >
-              Valider
+              Add a cat
             </Link>
           </button>
+          <h2 className="Home__h2">Your last cat-counted cats are :</h2>
+          <ul className="Home__list">
+            <li className="Home__item">Cat-count the</li>
+          </ul>
         </section>
       </div>
     </>
