@@ -1,10 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate  } from "react-router-dom";
 import Header from "./Header";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { updateCatCountByUserId } from "./catCountByUserId";
+import { updateCatCountByUserId } from "./api/catCountByUserId";
 function Home() {
-  const [catCountByUserId, setCatCountByUserId] = useState(0);
+  const [catCountByUserId, setCatCountByUserId] = useState(0);  
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (true) {
+      navigate('/login');
+    }
+  }, []);
 
   useEffect(() => {
     axios
@@ -29,8 +36,8 @@ function Home() {
     <>
       <div className="Home">
         <Header />
-        <section className="Home__section">
-          <h1 className="Home__h1">
+        <section className="section">
+          <h1 className="h1">
             Welcome to the Cat Count App
           </h1>
           <p>Your cat-count counter is : {catCountByUserId}</p>
@@ -43,7 +50,7 @@ function Home() {
               Add a cat
             </Link>
           </button>
-          <h2 className="Home__h2">Your last cat-counted cats are :</h2>
+          <h2 className="h2">Your last cat-counted cats are :</h2>
           <ul className="Home__list">
             <li className="Home__item">Cat-count the</li>
           </ul>

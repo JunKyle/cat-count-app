@@ -4,12 +4,12 @@ import { useState, useEffect } from "react";
 import {
   updateCatCountDescriptionByUserId,
   cancelCatCountByUserId,
-} from "./catCountByUserId";
+} from "./api/catCountByUserId";
 function AddCat() {
   const [catCountByUserId, setCatCountByUserId] = useState(0);
   const [description, setDescription] = useState("");
 
-  async function submitCatCountDescription(formData) {
+  async function submitCatCountDescription() {
     console.log("description", description);
     try {
       await updateCatCountDescriptionByUserId({
@@ -20,7 +20,7 @@ function AddCat() {
       return err.toString();
     }
   }
-  async function cancelCatCount(formData) {
+  async function cancelCatCount() {
     try {
       await cancelCatCountByUserId({
         userId: "0",
@@ -43,8 +43,8 @@ function AddCat() {
   return (
     <>
       <div className="AddCat">
-        <section className="AddCat__section">
-          <h1 className="AddCat__h1">Your cat has been succesfully added !</h1>
+        <section className="section">
+          <h1 className="h1">Your cat has been succesfully added !</h1>
           <p>Your cat-count total is: {catCountByUserId}</p>
           <p>
             You can add details with your cat-count
