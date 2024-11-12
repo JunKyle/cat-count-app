@@ -12,6 +12,20 @@ export async function addEncounterByUserId(data) {
 		});
 }
 
+export async function getencounter(data) {
+	return await axios
+		.get("/api/getencounter?userId=" + data.id)
+		.then((response) => {
+			if (response.status === 200 && response.data) {
+				return response.data;
+			}
+		})
+		.catch((error) => {
+			console.error(error);
+			return false;
+		});
+}
+
 export async function addEncounterDescriptionByEncounterId(data) {
 	return await axios
 		.post("/api/adddescription", data)

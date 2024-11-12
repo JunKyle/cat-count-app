@@ -3,7 +3,7 @@ import Cookies from 'universal-cookie';
 
 export async function getuser(data) {
 	return await axios
-		.get("/api/getUser?id=" + data)
+		.get("/api/getuser?id=" + data)
 		.then((response) => {
 			if (response.status === 200 && response.data) {
 				return response.data;

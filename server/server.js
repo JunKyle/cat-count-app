@@ -47,6 +47,15 @@ async function connect () {
 			  }
 		});
 
+		app.get('/api/getencounter', async (req, res) => {
+			console.log("req.query.userId", req.query.userId);
+		  Encounter.find({ "userId": req.query.userId}).then((encounters) => {
+		    res.json(encounters);
+		  }).catch((error) => {
+		    res.status(500).json({ error: 'Error retrieving encounter' });
+		  });
+		});
+
 		// user api
 		app.post('/api/signup', async (req, res) => {
 			  const newUser = new User(req.body);
