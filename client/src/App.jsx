@@ -2,7 +2,7 @@ import "./App.scss";
 import Home from "./Home";
 import AddCat from "./AddCat";
 import Login from "./Login";
-import SignIn from "./SignIn";
+import SignUp from "./SignUp";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
           <Route path="/addCat" element={<AddCat />} />
         </Routes>
       </div>

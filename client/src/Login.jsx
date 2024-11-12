@@ -1,19 +1,26 @@
 import "./App.scss";
 import { useState, useEffect } from "react";
 import { login } from "./api/login";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "./Header";
+import Cookies from 'universal-cookie';
 
 function Login() {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
+  const cookies = new Cookies();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (cookies.get("user")) {
+      navigate('/');
+    }
+  }, []);
 
   async function submitLogin() {
-    console.log("user", user);
-    console.log("password", password);
     try {
       await login({
-        user: user,
+        pseudo: user,
         password: password
       });
     } catch (err) {
@@ -49,7 +56,7 @@ function Login() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <Link className="link" to="/signin">create an account</Link>
+            <Link className="link" to="/signup">create an account</Link>
             <button className="button Login__button" onClick={submitLogin}>
               <Link to="/">Confirm</Link>
             </button>

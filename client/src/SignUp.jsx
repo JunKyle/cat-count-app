@@ -1,20 +1,26 @@
 import "./App.scss";
 import { useState, useEffect } from "react";
-import { signin } from "./api/login";
-import { Link } from "react-router-dom";
+import { signup } from "./api/login";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "./Header";
+import Cookies from 'universal-cookie';
 
-function SignIn() {
+function SignUp() {
   const [pseudo, setPseudo] = useState("");
   const [password, setPassword] = useState("");
   const [mail, setMail] = useState("");
+  const navigate = useNavigate();
+  const cookies = new Cookies();
 
-  async function submitSignIn() {
-    console.log("pseudo", pseudo);
-    console.log("password", password);
-    console.log("mail", mail);
+ useEffect(() => {
+    if (cookies.get("user")) {
+      navigate('/');
+    }
+  }, []);
+
+  async function submitSignUp() {
     try {
-      await signin({
+      await signup({
         pseudo: pseudo,
         password: password,
         mail: mail,
@@ -27,13 +33,13 @@ function SignIn() {
   }
   return (
     <>
-      <div className="SignIn">
+      <div className="SignUp">
         <Header />
         <section className="section">
           <h1 className="h1">
             Create an account
           </h1>
-          <form className="SignIn__form">
+          <form className="SignUp__form">
             <div className="formDiv">
               <label className="formLabel">Pseudo : </label>
               <input
@@ -65,7 +71,7 @@ function SignIn() {
               />
             </div>
             <Link className="link" to="/login">login with an existing account</Link>
-            <button className="button SignIn__button" onClick={submitSignIn}>
+            <button className="button SignUp__button" onClick={submitSignUp}>
               <Link to="/">Confirm</Link>
             </button>
           </form>
@@ -75,4 +81,4 @@ function SignIn() {
   );
 }
 
-export default SignIn;
+export default SignUp;
