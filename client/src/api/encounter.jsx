@@ -1,8 +1,8 @@
 import axios from "axios";
 
-export async function updateCatCountByUserId(data) {
+export async function addEncounterByUserId(data) {
 	return await axios
-		.post("/api/updateCatCountByUserId?" + JSON.stringify(data))
+		.post("/api/addencounter", data)
 		.then((response) => {
 			return true;
 		})
@@ -12,9 +12,9 @@ export async function updateCatCountByUserId(data) {
 		});
 }
 
-export async function updateCatCountDescriptionByUserId(data) {
+export async function addEncounterDescriptionByEncounterId(data) {
 	return await axios
-		.post("/api/updateCatCountDescriptionByUserId?" + JSON.stringify(data))
+		.post("/api/adddescription", data)
 		.then((response) => {
 			return true;
 		})
@@ -24,9 +24,9 @@ export async function updateCatCountDescriptionByUserId(data) {
 		});
 }
 
-export async function cancelCatCountByUserId(data) {
+export async function cancelEncounterByEncounterId(data) {
 	return await axios
-		.post("/api/cancelCatCountByUserId?" + JSON.stringify(data))
+		.post("/api/cancelEncounter", data)
 		.then((response) => {
 			return true;
 		})

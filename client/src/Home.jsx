@@ -2,7 +2,7 @@ import { Link, useNavigate  } from "react-router-dom";
 import Header from "./Header";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { updateCatCountByUserId } from "./api/catCountByUserId";
+import { addEncounterByUserId } from "./api/encounter";
 import { getuser } from "./api/login";
 import Cookies from 'universal-cookie';
 
@@ -32,23 +32,18 @@ function Home() {
     }
   }, []);
 
-  /*useEffect(() => {
-    axios
-      .get("/api/getCatCountByUserId")
-      .then((response) => {
-        setCatCountByUserId(0);
-      })
-      .catch((error) => {
-        console.error(error);
+  async function handleClick() {
+    try {
+      await addEncounterByUserId({
+        description: "",
+        date: new Date(),
+        geolocalization: "",
+        picture: "",
+        userId: user._id
       });
-  }, []);*/
-
-  function handleClick() {
-    updateCatCountByUserId({
-      catCount: catCountByUserId + 1,
-      date: new Date(),
-      userId: "0",
-    });
+    } catch (err) {
+      return err.toString();
+    }
   }
 
   return (

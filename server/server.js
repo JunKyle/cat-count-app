@@ -15,14 +15,39 @@ const userSchema = new mongoose.Schema({
 	password: String,
 	nbCatCount: Number
 });
-
 const User = mongoose.model('User', userSchema);
+
+const encounterSchema = new mongoose.Schema({
+	description: String,
+	date: Date,
+	userId: String,
+	geolocalization: String,
+	picture: String
+});
+const Encounter = mongoose.model('Encounter', encounterSchema);
 
 async function connect () {
 	try {
 		await mongoose.connect(uri);
 		console.log("Connected to MongoDb mongoose");
 
+		// encounter api
+		app.post('/api/addencounter', async (req, res) => {
+			  const newEncounter = new Encounter(req.body);
+
+			  const encounter = await newEncounter.save();
+
+			  if (encounter) {
+			    res.status(201).json({ 
+		    		message: 'Encounter created successfully',
+			   		encounter: encounter 
+			   	});
+			  } else {
+			    res.status(400).json({ error: 'Error creating encounter' });
+			  }
+		});
+
+		// user api
 		app.post('/api/signup', async (req, res) => {
 			  const newUser = new User(req.body);
 

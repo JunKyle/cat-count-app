@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import {
-  updateCatCountDescriptionByUserId,
-  cancelCatCountByUserId,
-} from "./api/catCountByUserId";
+  addEncounterDescriptionByEncounterId,
+  cancelEncounterByEncounterId,
+} from "./api/encounter";
 function AddCat() {
   const [catCountByUserId, setCatCountByUserId] = useState(0);
   const [description, setDescription] = useState("");
@@ -12,7 +12,7 @@ function AddCat() {
   async function submitCatCountDescription() {
     console.log("description", description);
     try {
-      await updateCatCountDescriptionByUserId({
+      await addEncounterDescriptionByEncounterId({
         description: description,
         userId: "0",
       });
@@ -22,7 +22,7 @@ function AddCat() {
   }
   async function cancelCatCount() {
     try {
-      await cancelCatCountByUserId({
+      await cancelEncounterByEncounterId({
         userId: "0",
       });
     } catch (err) {
