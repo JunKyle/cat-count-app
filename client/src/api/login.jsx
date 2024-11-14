@@ -1,7 +1,7 @@
 import axios from "axios";
 import Cookies from 'universal-cookie';
 
-export async function getuser(data) {
+export async function getUser(data) {
 	return await axios
 		.get("/api/getuser?id=" + data)
 		.then((response) => {
@@ -33,7 +33,7 @@ export async function login(data) {
 		});
 }
 
-export async function signup(data) {
+export async function signUp(data) {
 	return await axios
 		.post("/api/signup", data)
 		.then((response) => {

@@ -1,6 +1,6 @@
 import "./App.scss";
 import { useState, useEffect } from "react";
-import { signup } from "./api/login";
+import { signUp } from "./api/login";
 import { Link, useNavigate } from "react-router-dom";
 import Header from "./Header";
 import Cookies from 'universal-cookie';
@@ -20,7 +20,7 @@ function SignUp() {
 
   async function submitSignUp() {
     try {
-      await signup({
+      await signUp({
         pseudo: pseudo,
         password: password,
         mail: mail,

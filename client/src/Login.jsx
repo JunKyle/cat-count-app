@@ -19,10 +19,13 @@ function Login() {
 
   async function submitLogin() {
     try {
-      await login({
+      const response = await login({
         pseudo: user,
         password: password
       });
+      if (response) {
+        navigate('/');
+      }
     } catch (err) {
       return err.toString();
     }

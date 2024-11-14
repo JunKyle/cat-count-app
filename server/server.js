@@ -47,13 +47,38 @@ async function connect () {
 			  }
 		});
 
+		app.get('/api/getencounterbyuserid', async (req, res) => {
+			Encounter.find({ "userId": req.query.userId}).then((encounters) => {
+				res.json(encounters);
+			}).catch((error) => {
+				res.status(500).json({ error: 'Error retrieving encounters' });
+			});
+		});
+
 		app.get('/api/getencounter', async (req, res) => {
-			console.log("req.query.userId", req.query.userId);
-		  Encounter.find({ "userId": req.query.userId}).then((encounters) => {
-		    res.json(encounters);
-		  }).catch((error) => {
-		    res.status(500).json({ error: 'Error retrieving encounter' });
-		  });
+			Encounter.find({ "_id": req.query.id}).then((encounter) => {
+				res.json(encounter);
+			}).catch((error) => {
+				res.status(500).json({ error: 'Error retrieving encounter' });
+			});
+		});
+
+		app.post('/api/updatedescription', async (req, res) => {
+			Encounter.findOneAndUpdate({ "_id": req.body.id}, {"description": req.body.description}, {new: true}).then((encounter) => {
+				console.log("encounter", encounter);
+				res.json(encounter);
+			}).catch((error) => {
+				res.status(500).json({ error: 'Error retrieving encounter' });
+			});
+		});
+
+		app.post('/api/deleteencounter', async (req, res) => {
+			Encounter.deleteOne({ "_id": req.body.id}).then((encounter) => {
+				console.log("encounter", encounter);
+				res.json(encounter);
+			}).catch((error) => {
+				res.status(500).json({ error: 'Error retrieving encounter' });
+			});
 		});
 
 		// user api

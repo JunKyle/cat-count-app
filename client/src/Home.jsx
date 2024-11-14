@@ -2,8 +2,8 @@ import { Link, useNavigate  } from "react-router-dom";
 import Header from "./Header";
 import axios from "axios";
 import { useState, useEffect, useCallback } from "react";
-import { addEncounterByUserId, getencounter } from "./api/encounter";
-import { getuser } from "./api/login";
+import { addEncounterByUserId, getEncounter, getEncountersByUserId } from "./api/encounter";
+import { getUser } from "./api/login";
 import Cookies from 'universal-cookie';
 
 function Home() {
@@ -15,11 +15,9 @@ function Home() {
 
   const getData = useCallback(async () => {
     try {
-      const result = await getuser(cookies.get("user"));
-      setUser(result);
-      console.log("getdata", user)
-      if (user._id) {
-        getEncounters();
+      const result = await getUser(cookies.get("user"));
+      if (result) {
+        setUser(result);
       }
     } catch (err) {
       return err.toString();
@@ -39,18 +37,9 @@ function Home() {
     }
   }, []);
 
-  async function getEncounters() {
-    try {
-      const result = await getencounter({id: user._id});
-      setEncounters(result);
-    } catch (err) {
-      return err.toString();
-    }
-  }
-
   useEffect(() => {
       try {
-        if (user._id) {
+        if (user?._id) {
           getEncounters();
         }
       } catch (err) {
@@ -58,15 +47,28 @@ function Home() {
       }
   }, [user]);
 
-  async function handleClick() {
+  async function getEncounters() {
     try {
-      await addEncounterByUserId({
+      const result = await getEncountersByUserId({id: user._id});
+      setEncounters(result);
+    } catch (err) {
+      return err.toString();
+    }
+  }
+
+  async function editEncounterClick() {
+    try {
+      const response = await addEncounterByUserId({
         description: "",
         date: new Date(),
         geolocalization: "",
         picture: "",
         userId: user._id
       });
+      if (response && response._id) {
+        navigate("/editEncounter?id=" + response._id + "&encounter=true");
+      }
+
     } catch (err) {
       return err.toString();
     }
@@ -81,19 +83,14 @@ function Home() {
             Welcome {user?.pseudo} to the Cat Count App
           </h1>
           <p>Your cat-count counter is : {encounters?.length ? encounters?.length : 0} </p>
-          <button className="button Home__add">
-            <Link
-              data-testid="home-validate-link"
-              to="/addCat"
-              onClick={handleClick}
-            >
+          <button className="button Home__add"
+                  onClick={editEncounterClick}>
               Add a cat
-            </Link>
           </button>
           {encounters?.length && <h2 className="h2">Your last cat-counted cats are :</h2>}
           <ul className="Home__list">
-            {encounters.map((encounter, i) =>{
-              return (<li key={i} className="Home__item">Cat-count the {encounter.date} {encounter.description}</li>);
+            {encounters?.map((encounter, i) =>{
+              return (<li key={i} className="Home__item"><a href={"/editEncounter?id=" + encounter._id}>Cat-count the {encounter.date} {encounter.description}</a></li>);
             })}
           </ul>
         </section>

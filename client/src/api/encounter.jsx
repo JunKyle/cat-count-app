@@ -4,7 +4,9 @@ export async function addEncounterByUserId(data) {
 	return await axios
 		.post("/api/addencounter", data)
 		.then((response) => {
-			return true;
+			if (response.status === 201 && response.data?.encounter) {
+				return response.data.encounter;
+			}
 		})
 		.catch((error) => {
 			console.error(error);
@@ -12,9 +14,9 @@ export async function addEncounterByUserId(data) {
 		});
 }
 
-export async function getencounter(data) {
+export async function getEncountersByUserId(data) {
 	return await axios
-		.get("/api/getencounter?userId=" + data.id)
+		.get("/api/getencounterbyuserid?userId=" + data.id)
 		.then((response) => {
 			if (response.status === 200 && response.data) {
 				return response.data;
@@ -26,9 +28,23 @@ export async function getencounter(data) {
 		});
 }
 
+export async function getEncounterByEncounterId(data) {
+	return await axios
+		.get("/api/getencounter?id=" + data.id)
+		.then((response) => {
+			if (response.status === 200 && response.data && response.data[0]) {
+				return response.data[0];
+			}
+		})
+		.catch((error) => {
+			console.error(error);
+			return false;
+		});
+}
+
 export async function addEncounterDescriptionByEncounterId(data) {
 	return await axios
-		.post("/api/adddescription", data)
+		.post("/api/updatedescription", data)
 		.then((response) => {
 			return true;
 		})
@@ -40,7 +56,7 @@ export async function addEncounterDescriptionByEncounterId(data) {
 
 export async function cancelEncounterByEncounterId(data) {
 	return await axios
-		.post("/api/cancelEncounter", data)
+		.post("/api/deleteencounter", data)
 		.then((response) => {
 			return true;
 		})

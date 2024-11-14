@@ -46,15 +46,11 @@ a {
   color: black;
   border-color: #00e82f;
   cursor: pointer;
+  font-size: 1.5rem;
 
   &--red {
     background-color: #ff97ad;
     border-color: #ff0000;
-  }
-
-  a {
-    font-size: 1.5rem;
-
   }
 
   &:hover {
@@ -123,7 +119,7 @@ a {
   }
 }
 
-.AddCat {
+.EditEncounter {
   &__button {
     display: block;
     margin: 20px auto 0;
