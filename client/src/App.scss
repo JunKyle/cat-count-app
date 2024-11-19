@@ -108,6 +108,11 @@ a {
   }
 }
 
+.paragraph {
+  font-family: "LT_Comical";
+  font-size: 15px;  
+}
+
 .Home {
   &__list {
     margin: 0 0 20px;
@@ -138,7 +143,7 @@ a {
   } 
 }
 
-.SignIn {
+.SignUp {
   
   &__form {
     width: 100%;

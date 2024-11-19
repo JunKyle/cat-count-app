@@ -5,6 +5,7 @@ import { useState, useEffect, useCallback } from "react";
 import { addEncounterByUserId, getEncounter, getEncountersByUserId } from "./api/encounter";
 import { getUser } from "./api/login";
 import Cookies from 'universal-cookie';
+import { format } from 'date-fns';
 
 function Home() {
   const [catCountByUserId, setCatCountByUserId] = useState(0);
@@ -33,7 +34,6 @@ function Home() {
       } catch (err) {
         console(err.toString());
       }
-
     }
   }, []);
 
@@ -82,15 +82,15 @@ function Home() {
           <h1 className="h1">
             Welcome {user?.pseudo} to the Cat Count App
           </h1>
-          <p>Your cat-count counter is : {encounters?.length ? encounters?.length : 0} </p>
+          <p className="paragraph">Your cat-count counter is : {encounters?.length > 0 ? encounters?.length : ""} </p>
           <button className="button Home__add"
                   onClick={editEncounterClick}>
               Add a cat
           </button>
-          {encounters?.length && <h2 className="h2">Your last cat-counted cats are :</h2>}
+          {encounters?.length > 0 && <h2 className="h2">Your last cat-counted cats are :</h2>}
           <ul className="Home__list">
             {encounters?.map((encounter, i) =>{
-              return (<li key={i} className="Home__item"><a href={"/editEncounter?id=" + encounter._id}>Cat-count the {encounter.date} {encounter.description}</a></li>);
+              return (<li key={i} className="Home__item"><a className="link" href={"/editEncounter?id=" + encounter._id}>Cat-count the {format(encounter.date, "MM/dd/yyyy") + " at " + format(encounter.date, "kk:mm")}{encounter.description ? " : " + encounter.description : ""}</a></li>);
             })}
           </ul>
         </section>

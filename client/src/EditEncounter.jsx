@@ -6,6 +6,9 @@ import {
   cancelEncounterByEncounterId,
   getEncounterByEncounterId
 } from "./api/encounter";
+import Cookies from 'universal-cookie';
+import { format } from 'date-fns';
+
 function EditEncounter() {
   const [catCountByUserId, setCatCountByUserId] = useState(0);
   const [description, setDescription] = useState("");
@@ -15,6 +18,13 @@ function EditEncounter() {
   const queryParams = new URLSearchParams(location.search);
   const idParam = queryParams.get('id');
   const firstTimeEncounter = queryParams.get("encounter");
+  const cookies = new Cookies();
+
+  useEffect(() => {
+    if (!cookies.get("user")) {
+      navigate('/login');
+    }
+  }, []);
 
   useEffect(() => {
     if (!idParam || idParam === "" || idParam === null) {
@@ -70,12 +80,12 @@ function EditEncounter() {
       <div className="EditEncounter">
         <section className="section">
           <h1 className="h1">{firstTimeEncounter ? "Your cat has been succesfully added !" : "Edit your encounter with this cat"}</h1>
-          <p>
+          <p className="paragraph">
             You can add details with your cat-count
           </p>
-          {encounter && encounter.date && <p>Cat encountered the {encounter.date}</p>}
+          {encounter && encounter.date && <p className="paragraph">Cat encountered the {format(encounter.date, "MM/dd/yyyy") + " at " + format(encounter.date, "kk:mm")}</p>}
           <form className="EditEncounter__form">
-            <label>Description : </label>
+            <label className="formLabel">Description : </label>
             <input
               type="text"
               name="description"
